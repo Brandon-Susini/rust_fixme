@@ -1,7 +1,10 @@
 use std::fmt::{self, Formatter, Display};
 
 /* Demonstrates printing of a user defined struct using println! macro.*/
-
+///City struct that has fields to represent a city.
+/// * name: City name
+/// * lat: Cities latitude
+/// * lon: Cities longitude
 struct City {
     name: &'static str,
     // Latitude
@@ -9,7 +12,7 @@ struct City {
     // Longitude
     lon: f32,
 }
-
+/// Display implementation gives instructions on how to display this struct when printing.
 impl Display for City {
     // `f` is a buffer, this method must write the formatted string into it
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
@@ -21,12 +24,23 @@ impl Display for City {
                self.name, self.lat.abs(), lat_c, self.lon.abs(), lon_c)
     }
 }
-
+///Color struct represents an RGB value with fields
+/// * red: Red value out of 255
+/// * green: Green value out of 255
+/// * blue: Blue value out of 255
 #[derive(Debug)]
 struct Color {
     red: u8,
     green: u8,
     blue: u8,
+}
+/// Implementation for Display trait on struct Color
+impl Display for Color{
+    /// Use the fmt method to build a string representation of our Color struct,
+    /// and return a Result with the result or an error.
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result{
+        write!(f, "red: {},green: {},blue: {}",self.red,self.green,self.blue)
+    }
 }
 
 fn main() {
@@ -43,7 +57,6 @@ fn main() {
         Color { red: 0, green: 3, blue: 254 },
         Color { red: 0, green: 0, blue: 0 },
     ].iter() {
-        // Hint : Fix the code so you can print it using {}
-        println!("{:?}", *color);
+        println!("{}", *color);
     }
 }
